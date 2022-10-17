@@ -858,10 +858,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 721dd87f0356d0c41b030ac839cac5a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfItems: 5
+  itemsSelectionPanel: {fileID: 0}
   itemsAvailable:
   - {fileID: 11400000, guid: 3a66ad97bc880534382b1e666195a651, type: 2}
   - {fileID: 11400000, guid: 059602d1389c00140a1a9c0752dd42dd, type: 2}
   - {fileID: 11400000, guid: fced0cc9a426d4740a38fe11b1f0ae7c, type: 2}
+  selectedColour: {r: 0.05167608, g: 0.9622642, b: 0, a: 1}
+  notSelectedColour: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &630200910
 GameObject:
   m_ObjectHideFlags: 0
@@ -1468,6 +1472,7 @@ GameObject:
   - component: {fileID: 815625881}
   - component: {fileID: 815625880}
   - component: {fileID: 815625879}
+  - component: {fileID: 815625883}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1557,6 +1562,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &815625883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815625878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 721dd87f0356d0c41b030ac839cac5a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numberOfItems: 5
+  itemsSelectionPanel: {fileID: 1918855875}
+  itemsAvailable:
+  - {fileID: 11400000, guid: 3a66ad97bc880534382b1e666195a651, type: 2}
+  - {fileID: 11400000, guid: 059602d1389c00140a1a9c0752dd42dd, type: 2}
+  - {fileID: 11400000, guid: fced0cc9a426d4740a38fe11b1f0ae7c, type: 2}
+  selectedColour: {r: 0, g: 0, b: 0, a: 0}
+  notSelectedColour: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &898534304
 GameObject:
   m_ObjectHideFlags: 0

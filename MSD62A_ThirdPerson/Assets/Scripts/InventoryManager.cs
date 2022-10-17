@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.UI;
+using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -14,6 +16,12 @@ public class InventoryManager : MonoBehaviour
     [Tooltip("List Of Items")]
     public List<ItemScriptableObject> itemsAvailable;
 
+    [Tooltip("Selected Item Colour")]
+    public Color selectedColour;
+
+    [Tooltip("Not Selected Item Colour")]
+    public Color notSelectedColour;
+
     private List<InventoryItem> itemsForPlayer; //items visible to the player during the game
 
     // Start is called before the first frame update
@@ -21,12 +29,21 @@ public class InventoryManager : MonoBehaviour
     {
         itemsForPlayer = new List<InventoryItem>();
         PopulateInventorySpawn();
+        RefreshInventoryGUI();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.J) || Input.GetKeyDown(KeyCode.K))
+        {
+            ChangeSelection();
+        }
+    }
+
+    private void ChangeSelection()
+    {
+        throw new System.NotImplementedException();
     }
 
     /// <summary>
@@ -45,15 +62,43 @@ public class InventoryManager : MonoBehaviour
                 // 2. return a list with the amount of times objItem appears
             int countItems = itemsForPlayer.Where(x => x.item == objItem).ToList().Count;
 
-            itemsForPlayer.Add(new InventoryItem()
+            if(countItems == 0)
             {
-                item = objItem, quantity = 1
-            });
-
+                itemsForPlayer.Add(new InventoryItem() { item = objItem, quantity = 1 });
+            } 
+            else
+            {
+                //search for the element of the same type inside itemsForPlayer
+                var item = itemsForPlayer.First(x => x.item == objItem);
+                item.quantity += 1;
+            }
         }
 
-        print("Number of Inventory Items For Player: " + itemsForPlayer.Count);
+    }
 
+    private void RefreshInventoryGUI()
+    {
+        int buttonId = 0; 
+
+        foreach (InventoryItem i in itemsForPlayer)
+        {
+            //find the button
+            GameObject button = itemsSelectionPanel.transform.Find("Button" + buttonId).gameObject;
+
+            //search for the child image and change its sprite
+            button.transform.Find("Image").GetComponent<Image>().sprite = i.item.icon;
+
+            //change quantity
+            button.transform.Find("Quantity").GetComponent<TextMeshProUGUI>().text = "x" + i.quantity;
+
+            buttonId += 1;
+        }
+
+        // set active false redundant buttons
+        for(int i = buttonId; i < 3; i++)
+        {
+            itemsSelectionPanel.transform.Find("Button" + i).gameObject.SetActive(false);
+        }
     }
 
     public class InventoryItem
